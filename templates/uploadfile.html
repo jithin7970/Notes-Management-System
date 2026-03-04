@@ -1,0 +1,23 @@
+{% extends 'dashboard.html' %}
+{% block title %}All Notes {% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{url_for('static',filename='uploadfiles.css')}}"/>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+        <h1>Upload File</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Choose File:</label>
+                <input type="file" id="file" name="file" required>
+            </div>
+            <div class="note">
+                ⚠️ Maximum file size: 6 MB
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

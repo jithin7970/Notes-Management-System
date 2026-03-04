@@ -1,0 +1,60 @@
+<!doctype html>
+<!-- Dashboard Page -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <!-- Page Specific CSS -->
+    {% block extra_css %}{% endblock %}
+  </head>
+
+  <body>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div style="background:#ffe6e6;padding:10px;text-align:center;">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+    <nav>
+      <div class="nav-left">
+        <div class="dropdown">
+          <button class="dropdown-btn">Notes</button>
+          <div class="dropdown-content">
+            <a href="{{url_for('addnotes')}}">Add Notes</a>
+            <a href="{{url_for('viewallnotes')}}">View All Notes</a>
+            <a href="{{url_for('getexceldata')}}">Excel</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn">Files</button>
+          <div class="dropdown-content">
+            <a href="{{url_for('uploadfile')}}">Upload File</a>
+            <a href="{{url_for('viewallfiles')}}">View All Files</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <form action="{{ url_for('search') }}" method="POST" style="display:inline;">
+          <input type="text" name="sdata" class="search-box" placeholder="Search..." required>
+          <button type="submit">Search</button>
+        </form>
+        <a href="{{url_for('logout')}}"><button class="logout-btn">Logout</button></a>  
+      </div>
+    </nav>
+
+    <div style="padding: 2rem">
+      <h1>Welcome to Dashboard</h1>
+    </div>
+    
+  </body>
+  <footer>
+    {% block content %}{% endblock %}
+  </footer>
+</html>
